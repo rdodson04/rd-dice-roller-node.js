@@ -4,6 +4,8 @@ const app = express();
 const cors = require("cors")
 const port = 3000;
 
+var url = require('url');
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -16,19 +18,16 @@ app.use((req, res, next) => {
   }
 });
 
-app.use(express.static(__dirname + '/index.html'))
-app.use(cors({origin: '*'}))
+app.use(express.static(__dirname + '/static'))
+app.use(cors({ origin: '*' }))
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+
 
 app.get('/roll-dice', (req, res) => {
   const result = Math.floor(Math.random() * 6) + 1; // Generate a random number between 1 and 6
   res.json({ result });
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
