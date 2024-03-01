@@ -3,23 +3,11 @@ app = express()
 
 const cors = require("cors")
 
-var url = require('url');
-
-
 const port = process.env.PORT || 3000
-const majorVersion = 1
-const minorVersion = 3
-
-// Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
+ 
 app.use(express.static(__dirname + '/static'))
 app.use(cors({ origin: '*' }))
 
-
-app.get('/version', (request, response) => {
-	console.log('Calling "/version" on the Node.js server.')
-	response.type('text/plain')
-	response.send('Version: '+majorVersion+'.'+minorVersion)
-})
 
 app.get('/api/ping', (request, response) => {
 	console.log('Calling "/api/ping"')
@@ -29,7 +17,7 @@ app.get('/api/ping', (request, response) => {
 
 
 app.get('/roll-dice', (req, res) => {
-  const result = Math.floor(Math.random() * 6) + 1; // Generate a random number between 1 and 6
+  const result = Math.floor(Math.random() * 6) + 1; 
   res.json({ result });
 });
 
